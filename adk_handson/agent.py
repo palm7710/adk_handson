@@ -3,7 +3,6 @@ from zoneinfo import ZoneInfo
 from google.adk.agents import Agent
 from google.adk.tools import agent_tool
 from google.adk.tools import google_search
-from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
 
 # 天気を取得する
 # def get_weather(city: str) -> dict:
@@ -62,20 +61,11 @@ root_agent = Agent(
         "Agent to answer questions about the time and weather in a city."
     ),
     instruction=(
-        "You are a helpful agent who can answer user questions about the time and weather in a city. "
-        "For time queries, use the MCP time server tools to get accurate current time information for any city or timezone. "
-        "When a user asks for time in a city like 'Tokyo', use the appropriate timezone identifier (e.g., 'Asia/Tokyo'). "
-        "Common timezone mappings: Tokyo=Asia/Tokyo, New York=America/New_York, London=Europe/London, Paris=Europe/Paris, etc. "
-        "For weather queries, use the search agent to find current weather information."
+        "You are an agent who enjoys chatting with users."
     ),
     tools=[
-        agent_tool.AgentTool(agent=search_agent),
-        MCPToolset(
-            connection_params=StdioServerParameters(
-                command="/Users/uematsuayaka/Documents/adk_handson/.venv/bin/python",
-                args=["-m", "mcp_server_time", "--local-timezone=Asia/Tokyo"],
-            )
-        ),
+        agent_tool.AgentTool(agent=search_agent), # get_weather の代わりに search_agent をツールとして使う
+        get_current_time
     ],
 )
 
