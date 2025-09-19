@@ -1,6 +1,7 @@
 import datetime
 from zoneinfo import ZoneInfo
 from google.adk.agents import Agent
+from google.adk.tools import google_search
 
 # 天気を取得する
 def get_weather(city: str) -> dict:
@@ -44,14 +45,23 @@ def get_current_time(tz_identifier: str) -> dict:
     )
     return {"status": "success", "report": report}
 
+# root_agent = Agent(
+#     name="weather_time_agent",
+#     model="gemini-2.5-flash",
+#     description=(
+#         "Agent to answer questions about the time and weather in a city."
+#     ),
+#     instruction=(
+#         "You are an agent who enjoys chatting with users."
+#     ),
+#     tools=[get_weather, get_current_time],
+# )
+
 root_agent = Agent(
-    name="weather_time_agent",
+    name="basic_search_agent",
     model="gemini-2.5-flash",
-    description=(
-        "Agent to answer questions about the time and weather in a city."
-    ),
-    instruction=(
-        "You are an agent who enjoys chatting with users."
-    ),
-    tools=[get_weather, get_current_time],
+    description="Agent to answer questions using Google Search.",
+    instruction="I can answer your questions by searching the internet. Just ask me anything!",
+    google_search is a pre-built tool which allows the agent to perform Google searches.
+    tools=[google_search]
 )
