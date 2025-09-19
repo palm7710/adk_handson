@@ -22,5 +22,5 @@ _作成したエージェントの実行画面_
 - **機能**: ユーザーとの楽しいチャット
 
 ## 参考資料・コンテンツ
-https://google.github.io/adk-docs/tutorials/ 
+https://google.github.io/adk-docs/tutorials/  
 https://github.com/google/adk-samples 
